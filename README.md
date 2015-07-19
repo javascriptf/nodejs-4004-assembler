@@ -1,0 +1,3 @@
+# js-4004-assembler
+Intel 4004 assembler in javascript. This is not meant to be used anywhere, just for learning...
+
