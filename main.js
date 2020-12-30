@@ -1,14 +1,7 @@
-// @wolfram77
-// MAIN - Intel 4004 assembler (main)
-// 
-
-
-// required modules
 var fs = require('fs');
 
 
-
-// opcode table
+// Opcode table
 var param = {
 	'c': {'p': 0, 's': 4, 'a': 'condition'},
 	'r': {'p': 0, 's': 4, 'a': 'register'},
@@ -69,13 +62,13 @@ var mnemonic = {
 };
 
 
-// push an array to another array 
+// Push an array to another array.
 var push = function(dst, src) {
 	Array.prototype.push.apply(dst, src);
 };
 
 
-// insert data into array
+// Insert data into array.
 var insert = function(arr, val, pos) {
 	var i = pos >> 3, o = pos & 7;
 	while(val) {
@@ -86,7 +79,7 @@ var insert = function(arr, val, pos) {
 };
 
 
-// get opcode error
+// Get opcode error.
 var opcodeErr = function(mnem, pars) {
 	if(!(m = mnemonic[mnem])) return 'no such mnemonic';
 	if(m.p.length != pars.length) return 'parameter count mismatch ('+m.p.length+')';
@@ -97,7 +90,7 @@ var opcodeErr = function(mnem, pars) {
 };
 
 
-// get opcode value (byte array)
+// Get opcode value (byte array).
 var opcode = function(mnem, pars) {
 	var m = mnemonic[mnem], o = m.v.slice();
 	for(var i=0; i<pars.length; i++)
@@ -106,7 +99,7 @@ var opcode = function(mnem, pars) {
 };
 
 
-// assemble a string
+// Assemble a string.
 var assemble = function(str) {
 	var o = [], errs = [], lines = str.split('\n');
 	for(var l=0; l<lines.length; l++) {
@@ -121,7 +114,7 @@ var assemble = function(str) {
 };
 
 
-// run
+// Run.
 var run = function(dst, src) {
 	console.log(src+' -> '+dst);
 	var srcstr = fs.readFileSync(src).toString();
@@ -137,5 +130,5 @@ var run = function(dst, src) {
 };
 
 
-// test
+// Test.
 if(process.argv.length >= 4) run(process.argv[2], process.argv[3]);
